@@ -62,7 +62,7 @@ public class Service {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 
-		Facade facade = new EinwohnerNachAltersgruppenInsgesamtFacade(year);
+		Facade facade = new EinwohnerNachAltersgruppenKoelnFacade(year);
 		String json = facade.getJson();
 
 		logger.debug("json: " + json);

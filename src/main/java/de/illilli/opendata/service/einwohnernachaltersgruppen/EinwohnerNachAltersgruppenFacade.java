@@ -7,8 +7,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import de.illilli.opendata.service.einwohnernachaltersgruppen.bo.EinwohnerNachAltersgruppen;
-import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.EinwohnerNachAltersgruppenCsvParser;
+import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.CsvParser;
 import de.illilli.opendata.service.einwohnernachaltersgruppen.http.AskForEinwohnerNachAltersgruppen;
 
 /**
@@ -18,7 +17,7 @@ import de.illilli.opendata.service.einwohnernachaltersgruppen.http.AskForEinwohn
  * @author wolfram
  *
  */
-public abstract class EinwohnerNachAltersgruppenFacade implements Facade {
+public abstract class EinwohnerNachAltersgruppenFacade<T> implements Facade {
 
 	/**
 	 * http://www.offenedaten-koeln.de/sites/default/files/
@@ -29,14 +28,14 @@ public abstract class EinwohnerNachAltersgruppenFacade implements Facade {
 	URI uri;
 	String json;
 
-	public EinwohnerNachAltersgruppenFacade(int year, String csvFileName)
-			throws URISyntaxException {
+	public EinwohnerNachAltersgruppenFacade(int year, String csvFileName,
+			CsvParser<T> parser) throws URISyntaxException {
 		String urlString = OFFENE_DATEN_KOELN_URL + year + csvFileName;
 		uri = new URI(urlString);
 
-		AskForEinwohnerNachAltersgruppen<EinwohnerNachAltersgruppen> askFor = new AskForEinwohnerNachAltersgruppen<EinwohnerNachAltersgruppen>(
-				uri, new EinwohnerNachAltersgruppenCsvParser());
-		List<EinwohnerNachAltersgruppen> list = askFor.getList();
+		AskForEinwohnerNachAltersgruppen<T> askFor = new AskForEinwohnerNachAltersgruppen<T>(
+				uri, parser);
+		List<T> list = askFor.getList();
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		json = gson.toJson(list);

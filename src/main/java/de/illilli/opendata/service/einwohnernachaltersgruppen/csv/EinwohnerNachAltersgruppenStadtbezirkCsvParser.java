@@ -2,21 +2,21 @@ package de.illilli.opendata.service.einwohnernachaltersgruppen.csv;
 
 import org.apache.log4j.Logger;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
-import de.illilli.opendata.service.einwohnernachaltersgruppen.bo.EinwohnerNachAltersgruppenKoeln;
+import de.illilli.opendata.service.einwohnernachaltersgruppen.bo.EinwohnerNachAltersgruppenStadtbezirk;
 
-public class EinwohnerNachAltersgruppenKoelnCsvParser extends
-		EinwohnerNachAltersgruppenCsvParser<EinwohnerNachAltersgruppenKoeln> {
+public class EinwohnerNachAltersgruppenStadtbezirkCsvParser
+		extends
+		EinwohnerNachAltersgruppenCsvParser<EinwohnerNachAltersgruppenStadtbezirk> {
 
 	@SuppressWarnings("unused")
 	private static final Logger logger = Logger
-			.getLogger(EinwohnerNachAltersgruppenKoelnCsvParser.class);
+			.getLogger(EinwohnerNachAltersgruppenStadtbezirkCsvParser.class);
 
-	final static CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
-			.addColumn("koelnGesamt") //
+	final CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
+			.addColumn("nr") //
+			.addColumn("stadtbezirk") //
 			.addColumn("einwohnerInsgesamt") //
 			.addColumn("a0_2") //
 			.addColumn("a3_5") //
@@ -31,12 +31,11 @@ public class EinwohnerNachAltersgruppenKoelnCsvParser extends
 			.addColumn("a80undAelter") //
 			.build();
 
-	public EinwohnerNachAltersgruppenKoelnCsvParser() {
+	public EinwohnerNachAltersgruppenStadtbezirkCsvParser() {
 
-		ObjectMapper mapper = new CsvMapper();
 		objectReader = mapper.reader(SIMPLE_SCHEMA);
 		objectReader = objectReader
-				.withType(EinwohnerNachAltersgruppenKoeln.class);
+				.withType(EinwohnerNachAltersgruppenStadtbezirk.class);
 	}
 
 }
