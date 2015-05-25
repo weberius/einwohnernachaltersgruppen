@@ -37,9 +37,6 @@ public abstract class EinwohnerNachAltersgruppenFacade implements Facade {
 		AskForEinwohnerNachAltersgruppen<EinwohnerNachAltersgruppen> askFor = new AskForEinwohnerNachAltersgruppen<EinwohnerNachAltersgruppen>(
 				uri, new EinwohnerNachAltersgruppenCsvParser());
 		List<EinwohnerNachAltersgruppen> list = askFor.getList();
-		for (EinwohnerNachAltersgruppen enag : list) {
-			System.out.println(enag.toString());
-		}
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		json = gson.toJson(list);

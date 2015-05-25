@@ -3,10 +3,13 @@ package de.illilli.opendata.service.einwohnernachaltersgruppen;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
@@ -29,9 +32,16 @@ public class Service {
 	private static final Logger logger = Logger.getLogger(Service.class);
 	public static final String ALTERSGRUPPEN_STADTTEIL_URL = "http://www.offenedaten-koeln.de/sites/default/files/2012_Altersgruppen_Stadtteil.csv";
 
+	@Context
+	HttpServletRequest request;
+
+	@Context
+	HttpServletResponse response;
+
 	/**
 	 * <p>
-	 * http://localhost:8080/einwohnernachaltersgruppen/service/2012
+	 * <a href="http://localhost:8080/einwohnernachaltersgruppen/service/2012">
+	 * Einwohner in K&ouml;ln gesamt</a>
 	 * </p>
 	 * <p>
 	 * This Service returns data for whole cologne by year.
@@ -49,11 +59,12 @@ public class Service {
 	public String getByYear(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException,
 			URISyntaxException {
-		System.out.println("#########");
+		// setze das Character-Encoding fuer die Antwort auf UTF-8
+		response.setCharacterEncoding("UTF-8");
+
 		Facade facade = new EinwohnerNachAltersgruppenInsgesamtFacade(year);
 		String json = facade.getJson();
-		System.out.println("json: " + json);
-		System.out.println("#########");
+
 		logger.debug("json: " + json);
 		return json;
 	}
@@ -61,7 +72,9 @@ public class Service {
 	/**
 	 * <p>
 	 * <p>
-	 * http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk
+	 * <a href=
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk"
+	 * >Einwohner in K&ouml;n je Stadtbezirk</a>
 	 * </p>
 	 * </p> http://www.offenedaten-koeln.de/sites/default/files/
 	 * 2012_Altersgruppen_Stadtbezirk.csv
@@ -78,6 +91,9 @@ public class Service {
 	public String getStadtbezirkByJahr(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException,
 			URISyntaxException {
+		// setze das Character-Encoding fuer die Antwort auf UTF-8
+		response.setCharacterEncoding("UTF-8");
+
 		Facade facade = new EinwohnerNachAltersgruppenStadtbezirkFacade(year);
 		String json = facade.getJson();
 		logger.debug("json: " + json);
@@ -85,6 +101,11 @@ public class Service {
 	}
 
 	/**
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk/9"
+	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
+	 * </p>
 	 * http://www.offenedaten-koeln.de/sites/default/files/
 	 * 2012_Altersgruppen_Stadtbezirk.csv
 	 * 
@@ -100,15 +121,26 @@ public class Service {
 	public String getStadtbezirkByJahrAndNumber(@PathParam("year") int year,
 			@PathParam("nr") int nr) throws JsonParseException,
 			JsonMappingException, IOException, URISyntaxException {
-		Facade facade = new EinwohnerNachAltersgruppenInsgesamtFacade(year);
+		// setze das Character-Encoding fuer die Antwort auf UTF-8
+		response.setCharacterEncoding("UTF-8");
+
+		Facade facade = new EinwohnerNachAltersgruppenStadtbezirkFacade(year);
 		String json = facade.getJson();
 		logger.debug("json: " + json);
 		return json;
 	}
 
 	/**
-	 * http://www.offenedaten-koeln.de/sites/default/files/
-	 * 2012_Altersgruppen_Stadtteil.csv
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk/9"
+	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
+	 * </p>
+	 * <p>
+	 * <a href=
+	 * "http://www.offenedaten-koeln.de/sites/default/files/2012_Altersgruppen_Stadtteil.csv"
+	 * >Offene Daten K&ouml;ln Altergruppen Stadtteil csv</a>
+	 * </p>
 	 * 
 	 * @return
 	 * @throws JsonParseException
@@ -122,13 +154,22 @@ public class Service {
 	public String getStadtteilByJahr(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException,
 			URISyntaxException {
-		Facade facade = new EinwohnerNachAltersgruppenInsgesamtFacade(year);
+		// setze das Character-Encoding fuer die Antwort auf UTF-8
+		response.setCharacterEncoding("UTF-8");
+
+		Facade facade = new EinwohnerNachAltersgruppenStadtteilFacade(year);
 		String json = facade.getJson();
 		logger.debug("json: " + json);
 		return json;
 	}
 
 	/**
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtteil/901"
+	 * >Einwohner nach Altersgruppen - Stadtteil K&ouml;ln M&uuml;lheim</a>
+	 * </p>
+	 * 
 	 * http://www.offenedaten-koeln.de/sites/default/files/
 	 * 2012_Altersgruppen_Stadtteil.csv
 	 * 
@@ -144,7 +185,10 @@ public class Service {
 	public String getStadtteilByJahrAndNumber(@PathParam("year") int year,
 			@PathParam("nr") int nr) throws JsonParseException,
 			JsonMappingException, IOException, URISyntaxException {
-		Facade facade = new EinwohnerNachAltersgruppenInsgesamtFacade(year);
+		// setze das Character-Encoding fuer die Antwort auf UTF-8
+		response.setCharacterEncoding("UTF-8");
+
+		Facade facade = new EinwohnerNachAltersgruppenStadtteilFacade(year);
 		String json = facade.getJson();
 		logger.debug("json: " + json);
 		return json;
