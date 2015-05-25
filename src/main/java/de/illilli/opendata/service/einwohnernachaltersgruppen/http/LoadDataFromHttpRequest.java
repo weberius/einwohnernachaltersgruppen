@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -17,18 +15,31 @@ import org.apache.log4j.Logger;
 
 import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.CsvParser;
 
-public class LoadDataFromHttpRequest<T> {
+public class LoadDataFromHttpRequest<T> extends LoadData<T> {
 
 	private static final Logger logger = Logger
 			.getLogger(LoadDataFromHttpRequest.class);
 
-	private StringBuilder lineBuilder = new StringBuilder();
-	private List<T> objectList = new ArrayList<T>();
-	private boolean fileFound = false;
-	private BufferedReader br;
+	private HttpClient httpClient;
 
 	public LoadDataFromHttpRequest(URI uri, CsvParser<T> csvParser) {
-		HttpClient httpClient = HttpClientBuilder.create().build();
+		this.uri = uri;
+		this.csvParser = csvParser;
+
+		try {
+			super.load();
+		} catch (ClientProtocolException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+	}
+
+	@Override
+	void init() {
+		httpClient = HttpClientBuilder.create().build();
 		HttpGet getRequest = new HttpGet(uri);
 		getRequest.addHeader("accept", "application/json");
 		HttpResponse response;
@@ -46,38 +57,14 @@ public class LoadDataFromHttpRequest<T> {
 				return;
 			}
 
-			br = new BufferedReader(new InputStreamReader(src, "UTF-8"));
-			String line;
-			boolean firstLine = true;
-			while ((line = br.readLine()) != null) {
-
-				if (!firstLine) {
-					lineBuilder.append("\n");
-					lineBuilder.append(line);
-					T myTinyObject = csvParser.getObject(line);
-					objectList.add(myTinyObject);
-				} else {
-					lineBuilder.append(line);
-				}
-				firstLine = false;
-			}
-			br.close();
+			br = new BufferedReader(new InputStreamReader(src, UTF_8));
 
 		} catch (ClientProtocolException e) {
 			logger.error(e);
 		} catch (IOException e) {
 			logger.error(e);
-		} finally {
-			httpClient.getConnectionManager().shutdown();
 		}
-	}
 
-	public boolean isFileFound() {
-		return fileFound;
-	}
-
-	public List<T> getObjectList() {
-		return objectList;
 	}
 
 }

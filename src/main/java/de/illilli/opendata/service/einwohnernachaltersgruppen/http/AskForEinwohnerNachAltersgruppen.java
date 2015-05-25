@@ -36,9 +36,9 @@ public class AskForEinwohnerNachAltersgruppen<T> {
 	public AskForEinwohnerNachAltersgruppen(URI uri, CsvParser<T> csvParser) {
 
 		einwohnerList = new ArrayList<T>();
-		LoadDataFromHttpRequest<T> loadCSVDataFromResource = new LoadDataFromHttpRequest<T>(
+		LoadData<T> loadCSVData = new LoadDataFromHttpRequest<T>(
 				uri, csvParser);
-		einwohnerList = loadCSVDataFromResource.getObjectList();
+		einwohnerList = loadCSVData.getObjectList();
 		logger.debug("Data read from '" + uri.getPath() + "'");
 
 	}
