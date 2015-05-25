@@ -106,36 +106,6 @@ public class Service {
 	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk/9"
 	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
 	 * </p>
-	 * http://www.offenedaten-koeln.de/sites/default/files/
-	 * 2012_Altersgruppen_Stadtbezirk.csv
-	 * 
-	 * @return
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 */
-	@GET
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{year}/stadtbezirk/{nr}")
-	public String getStadtbezirkByJahrAndNumber(@PathParam("year") int year,
-			@PathParam("nr") int nr) throws JsonParseException,
-			JsonMappingException, IOException, URISyntaxException {
-		// setze das Character-Encoding fuer die Antwort auf UTF-8
-		response.setCharacterEncoding("UTF-8");
-
-		Facade facade = new EinwohnerNachAltersgruppenStadtbezirkFacade(year);
-		String json = facade.getJson();
-		logger.debug("json: " + json);
-		return json;
-	}
-
-	/**
-	 * <p>
-	 * <a href=
-	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk/9"
-	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
-	 * </p>
 	 * <p>
 	 * <a href=
 	 * "http://www.offenedaten-koeln.de/sites/default/files/2012_Altersgruppen_Stadtteil.csv"
@@ -154,37 +124,6 @@ public class Service {
 	public String getStadtteilByJahr(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException,
 			URISyntaxException {
-		// setze das Character-Encoding fuer die Antwort auf UTF-8
-		response.setCharacterEncoding("UTF-8");
-
-		Facade facade = new EinwohnerNachAltersgruppenStadtteilFacade(year);
-		String json = facade.getJson();
-		logger.debug("json: " + json);
-		return json;
-	}
-
-	/**
-	 * <p>
-	 * <a href=
-	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtteil/901"
-	 * >Einwohner nach Altersgruppen - Stadtteil K&ouml;ln M&uuml;lheim</a>
-	 * </p>
-	 * 
-	 * http://www.offenedaten-koeln.de/sites/default/files/
-	 * 2012_Altersgruppen_Stadtteil.csv
-	 * 
-	 * @return
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 */
-	@GET
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{year}/stadtteil/{nr}")
-	public String getStadtteilByJahrAndNumber(@PathParam("year") int year,
-			@PathParam("nr") int nr) throws JsonParseException,
-			JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 
