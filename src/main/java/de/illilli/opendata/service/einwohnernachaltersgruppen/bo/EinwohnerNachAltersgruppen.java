@@ -111,4 +111,59 @@ public abstract class EinwohnerNachAltersgruppen {
 		this.a80undAelter = a80undAelter;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + a0_2;
+		result = prime * result + a15_17;
+		result = prime * result + a18_20;
+		result = prime * result + a21_34;
+		result = prime * result + a35_59;
+		result = prime * result + a3_5;
+		result = prime * result + a60_64;
+		result = prime * result + a65_74;
+		result = prime * result + a6_14;
+		result = prime * result + a75_79;
+		result = prime * result + a80undAelter;
+		result = prime * result + einwohnerInsgesamt;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EinwohnerNachAltersgruppen other = (EinwohnerNachAltersgruppen) obj;
+		if (a0_2 != other.a0_2)
+			return false;
+		if (a15_17 != other.a15_17)
+			return false;
+		if (a18_20 != other.a18_20)
+			return false;
+		if (a21_34 != other.a21_34)
+			return false;
+		if (a35_59 != other.a35_59)
+			return false;
+		if (a3_5 != other.a3_5)
+			return false;
+		if (a60_64 != other.a60_64)
+			return false;
+		if (a65_74 != other.a65_74)
+			return false;
+		if (a6_14 != other.a6_14)
+			return false;
+		if (a75_79 != other.a75_79)
+			return false;
+		if (a80undAelter != other.a80undAelter)
+			return false;
+		if (einwohnerInsgesamt != other.einwohnerInsgesamt)
+			return false;
+		return true;
+	}
+
 }

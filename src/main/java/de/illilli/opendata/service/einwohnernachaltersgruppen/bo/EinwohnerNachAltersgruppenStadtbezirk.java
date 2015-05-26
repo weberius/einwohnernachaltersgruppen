@@ -23,6 +23,35 @@ public class EinwohnerNachAltersgruppenStadtbezirk extends
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + nr;
+		result = prime * result
+				+ ((stadtbezirk == null) ? 0 : stadtbezirk.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EinwohnerNachAltersgruppenStadtbezirk other = (EinwohnerNachAltersgruppenStadtbezirk) obj;
+		if (nr != other.nr)
+			return false;
+		if (stadtbezirk == null) {
+			if (other.stadtbezirk != null)
+				return false;
+		} else if (!stadtbezirk.equals(other.stadtbezirk))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "EinwohnerNachAltersgruppenStadtbezirk [nr=" + nr
 				+ ", stadtbezirk=" + stadtbezirk + ", getEinwohnerInsgesamt()="
