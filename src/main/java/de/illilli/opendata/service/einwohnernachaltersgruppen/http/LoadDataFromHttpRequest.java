@@ -64,6 +64,7 @@ public class LoadDataFromHttpRequest<T> extends LoadData<T> {
 		} catch (IOException e) {
 			logger.error(e);
 		}
+		logger.debug("read from " + uri.getPath());
 
 	}
 
