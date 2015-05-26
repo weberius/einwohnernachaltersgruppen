@@ -15,7 +15,7 @@ public class EinwohnerNachAltersgruppenKoelnCsvParser extends
 	private static final Logger logger = Logger
 			.getLogger(EinwohnerNachAltersgruppenKoelnCsvParser.class);
 
-	final static CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
+	final CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
 			.addColumn("koelnGesamt") //
 			.addColumn("einwohnerInsgesamt") //
 			.addColumn("a0_2") //

@@ -16,7 +16,7 @@ public class EinwohnerNachAltersgruppenStadtteilCsvParser
 	private static final Logger logger = Logger
 			.getLogger(EinwohnerNachAltersgruppenStadtteilCsvParser.class);
 
-	final static CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
+	final CsvSchema SIMPLE_SCHEMA = CsvSchema.builder() //
 			.addColumn("nr") //
 			.addColumn("stadtteil") //
 			.addColumn("einwohnerInsgesamt") //
