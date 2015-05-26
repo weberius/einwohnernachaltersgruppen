@@ -23,18 +23,7 @@ public class LoadDataFromHttpRequest<T> extends LoadData<T> {
 	private HttpClient httpClient;
 
 	public LoadDataFromHttpRequest(URI uri, CsvParser<T> csvParser) {
-		this.uri = uri;
-		this.csvParser = csvParser;
-
-		try {
-			super.load();
-		} catch (ClientProtocolException e) {
-			logger.error(e);
-		} catch (IOException e) {
-			logger.error(e);
-		} finally {
-			httpClient.getConnectionManager().shutdown();
-		}
+		super(uri, csvParser);
 	}
 
 	@Override

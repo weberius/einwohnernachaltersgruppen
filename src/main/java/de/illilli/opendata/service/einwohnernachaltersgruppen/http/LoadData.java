@@ -7,12 +7,15 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.CsvParser;
 
 public abstract class LoadData<T> {
 
+	private static final Logger logger = Logger.getLogger(LoadData.class);
 	static final String UTF_8 = "UTF-8";
 	StringBuilder lineBuilder = new StringBuilder();
 	List<T> objectList = new ArrayList<T>();
@@ -22,10 +25,25 @@ public abstract class LoadData<T> {
 	URI uri;
 	String line;
 
-	void load() throws JsonProcessingException, UnsupportedEncodingException,
-			IOException {
+	public LoadData(URI uri, CsvParser<T> csvParser) {
+		this.uri = uri;
+		this.csvParser = csvParser;
 
 		init();
+
+		try {
+			load();
+		} catch (JsonProcessingException e) {
+			logger.error(e);
+		} catch (UnsupportedEncodingException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
+		}
+	}
+
+	void load() throws JsonProcessingException, UnsupportedEncodingException,
+			IOException {
 
 		boolean firstLine = true;
 		while ((line = br.readLine()) != null) {
@@ -50,6 +68,9 @@ public abstract class LoadData<T> {
 		return objectList;
 	}
 
+	/**
+	 * initializes BufferedReader.
+	 */
 	abstract void init();
 
 }
