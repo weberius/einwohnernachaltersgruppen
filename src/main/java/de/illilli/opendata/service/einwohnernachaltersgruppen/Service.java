@@ -103,7 +103,7 @@ public class Service {
 	/**
 	 * <p>
 	 * <a href=
-	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk/9"
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtteil"
 	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
 	 * </p>
 	 * <p>
