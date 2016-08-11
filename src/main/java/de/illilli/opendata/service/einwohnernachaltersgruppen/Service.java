@@ -17,11 +17,13 @@ import org.apache.log4j.Logger;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import de.illilli.opendata.service.Facade;
+
 /**
  * <p>
- * This service reads the csv Data for <a
- * href="http://www.offenedaten-koeln.de/dataset/einwohner-nach-altersgruppen"
- * >Einwohner Nach Altersgruppen</a> from www.offenedaten-koeln.de and returns a
+ * This service reads the csv Data for <a href=
+ * "http://www.offenedaten-koeln.de/dataset/einwohner-nach-altersgruppen" >
+ * Einwohner Nach Altersgruppen</a> from www.offenedaten-koeln.de and returns a
  * json representation ().
  * </p>
  *
@@ -57,8 +59,7 @@ public class Service {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/{year}")
 	public String getByYear(@PathParam("year") int year)
-			throws JsonParseException, JsonMappingException, IOException,
-			URISyntaxException {
+			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 
@@ -76,7 +77,8 @@ public class Service {
 	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk"
 	 * >Einwohner in K&ouml;n je Stadtbezirk</a>
 	 * </p>
-	 * </p> http://www.offenedaten-koeln.de/sites/default/files/
+	 * </p>
+	 * http://www.offenedaten-koeln.de/sites/default/files/
 	 * 2012_Altersgruppen_Stadtbezirk.csv
 	 * 
 	 * @return
@@ -89,8 +91,7 @@ public class Service {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/{year}/stadtbezirk")
 	public String getStadtbezirkByJahr(@PathParam("year") int year)
-			throws JsonParseException, JsonMappingException, IOException,
-			URISyntaxException {
+			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 
@@ -104,7 +105,7 @@ public class Service {
 	 * <p>
 	 * <a href=
 	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtteil"
-	 * >Einwohner nach Altersgruppen - Stadtbezirk K&ouml;ln M&uuml;lheim</a>
+	 * >Einwohner nach Altersgruppen je Stadtteil</a>
 	 * </p>
 	 * <p>
 	 * <a href=
@@ -122,8 +123,7 @@ public class Service {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/{year}/stadtteil")
 	public String getStadtteilByJahr(@PathParam("year") int year)
-			throws JsonParseException, JsonMappingException, IOException,
-			URISyntaxException {
+			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 

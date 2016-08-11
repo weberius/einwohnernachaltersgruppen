@@ -8,8 +8,7 @@ import org.apache.log4j.Logger;
 public class AskForEinwohnerNachAltersgruppen<T> {
 
 	@SuppressWarnings("unused")
-	private static final Logger logger = Logger
-			.getLogger(AskForEinwohnerNachAltersgruppen.class);
+	private static final Logger logger = Logger.getLogger(AskForEinwohnerNachAltersgruppen.class);
 
 	private List<T> einwohnerList = new ArrayList<T>();
 
