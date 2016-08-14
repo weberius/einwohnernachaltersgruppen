@@ -1,41 +1,34 @@
 package de.illilli.opendata.service.einwohnernachaltersgruppen;
 
-import java.net.URI;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-import de.illilli.opendata.service.Config;
+import com.google.gson.Gson;
+
+import de.illilli.opendata.service.AskFor;
+import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.einwohnernachaltersgruppen.bo.EinwohnerNachAltersgruppenStadtteil;
-import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.CsvParser;
-import de.illilli.opendata.service.einwohnernachaltersgruppen.csv.EinwohnerNachAltersgruppenStadtteilCsvParser;
-import de.illilli.opendata.service.einwohnernachaltersgruppen.http.LoadData;
-import de.illilli.opendata.service.einwohnernachaltersgruppen.http.LoadDataFromHttpRequest;
+import de.illilli.opendata.service.einwohnernachaltersgruppen.http.AskForEinwohnerNachAltersgruppenStadtteil;
 
 /**
  * read data from http://www.offenedaten-koeln.de/sites/default/files/
  * 2012_Altersgruppen_Stadtteil.csv
  */
-public class EinwohnerNachAltersgruppenStadtteilFacade
-		extends EinwohnerNachAltersgruppenFacade<EinwohnerNachAltersgruppenStadtteil> {
+public class EinwohnerNachAltersgruppenStadtteilFacade implements Facade {
 
-	public EinwohnerNachAltersgruppenStadtteilFacade(int year) throws URISyntaxException {
-		super(year);
+	private List<EinwohnerNachAltersgruppenStadtteil> einwohnerList;
+
+	public EinwohnerNachAltersgruppenStadtteilFacade(int year)
+			throws URISyntaxException, MalformedURLException, IOException {
+		AskFor<List<EinwohnerNachAltersgruppenStadtteil>> askFor = new AskForEinwohnerNachAltersgruppenStadtteil(year);
+		einwohnerList = askFor.getData();
 	}
 
 	@Override
-	LoadData<EinwohnerNachAltersgruppenStadtteil> getLoadData(int year) throws URISyntaxException {
-		return new LoadDataFromHttpRequest<EinwohnerNachAltersgruppenStadtteil>(getURI(year), getCsvParser());
+	public String getJson() {
+		Gson gson = new Gson();
+		return gson.toJson(einwohnerList);
 	}
-
-	@Override
-	URI getURI(int year) throws URISyntaxException {
-		String uriString = Config.getProperty("offenedaten.koeln.url") + year
-				+ Config.getProperty("offenedaten.koeln.altersgruppen.stadtteil");
-		return new URI(uriString);
-	}
-
-	@Override
-	CsvParser<EinwohnerNachAltersgruppenStadtteil> getCsvParser() {
-		return new EinwohnerNachAltersgruppenStadtteilCsvParser();
-	}
-
 }

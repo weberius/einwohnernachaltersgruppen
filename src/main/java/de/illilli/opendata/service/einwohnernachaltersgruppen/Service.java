@@ -66,7 +66,6 @@ public class Service {
 		Facade facade = new EinwohnerNachAltersgruppenKoelnFacade(year);
 		String json = facade.getJson();
 
-		logger.debug("json: " + json);
 		return json;
 	}
 
