@@ -4,17 +4,20 @@ Dieser Service liest von [Offene Daten Köln](http://www.offenedaten-koeln.de/) 
 
 ## Services
 
-### /einwohnernachaltersgruppen/service/2012
+### /einwohnernachaltersgruppen/service/insgesamt/2012
 
-Einwohner in K&ouml;ln gesamt
+Einwohner in K&ouml;ln gesamt in Jahr 2012; 
+Es sind Daten der Jahre 2010, 2011, 2012, 2013, 2013, 2104 und 2015 vorhanden.
 
-### /einwohnernachaltersgruppen/service/2012/stadtbezirk
+### /einwohnernachaltersgruppen/service/stadtbezirk/2012
 
-Einwohner in K&ouml;ln je Stadtbezirk
+Einwohner in K&ouml;ln je Stadtbezirk;
+Es sind Daten der Jahre 2010, 2011, 2012, 2013, 2013, 2104 und 2015 vorhanden.
 
-### /einwohnernachaltersgruppen/service/2012/stadtteil
+### /einwohnernachaltersgruppen/service/stadtteil/2012
 
-Einwohner nach Altersgruppen je Stadtteil
+Einwohner nach Altersgruppen je Stadtteil;
+Es sind Daten der Jahre 2010, 2011, 2012, 2013, 2013, 2104 und 2015 vorhanden.
 
 ## Entwicklungsstand
 

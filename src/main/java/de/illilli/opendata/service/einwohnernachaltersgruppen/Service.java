@@ -32,7 +32,6 @@ import de.illilli.opendata.service.Facade;
 public class Service {
 
 	private static final Logger logger = Logger.getLogger(Service.class);
-	public static final String ALTERSGRUPPEN_STADTTEIL_URL = "http://www.offenedaten-koeln.de/sites/default/files/2012_Altersgruppen_Stadtteil.csv";
 
 	@Context
 	HttpServletRequest request;
@@ -42,7 +41,8 @@ public class Service {
 
 	/**
 	 * <p>
-	 * <a href="http://localhost:8080/einwohnernachaltersgruppen/service/2012">
+	 * <a href=
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/insgesamt/2012">
 	 * Einwohner in K&ouml;ln gesamt</a>
 	 * </p>
 	 * <p>
@@ -57,7 +57,7 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{year}")
+	@Path("/insgesamt/{year}")
 	public String getByYear(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
@@ -73,7 +73,7 @@ public class Service {
 	 * <p>
 	 * <p>
 	 * <a href=
-	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtbezirk"
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/stadtbezirk/2012"
 	 * >Einwohner in K&ouml;n je Stadtbezirk</a>
 	 * </p>
 	 * </p>
@@ -88,7 +88,7 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{year}/stadtbezirk")
+	@Path("/stadtbezirk/{year}")
 	public String getStadtbezirkByJahr(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
@@ -103,7 +103,7 @@ public class Service {
 	/**
 	 * <p>
 	 * <a href=
-	 * "http://localhost:8080/einwohnernachaltersgruppen/service/2012/stadtteil"
+	 * "http://localhost:8080/einwohnernachaltersgruppen/service/stadtteil/2012"
 	 * >Einwohner nach Altersgruppen je Stadtteil</a>
 	 * </p>
 	 * <p>
@@ -120,7 +120,7 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{year}/stadtteil")
+	@Path("/stadtteil/{year}")
 	public String getStadtteilByJahr(@PathParam("year") int year)
 			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
